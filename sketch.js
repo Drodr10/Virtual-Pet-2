@@ -1,4 +1,3 @@
-//Create variables here
 var dog, normalDog, happyDog, database, foodS;
 var feedButton, addButton;
 var fedTime, lastFed;
@@ -6,7 +5,6 @@ var foodObj;
 
 function preload()
 {
-  //load images here
   normalDog = loadImage("images/dogImg.png");
   happyDog = loadImage("images/dogImg1.png");
 }
@@ -44,15 +42,21 @@ function draw() {
 
   foodObj.display();
 
-  feedButton.mousePressed(function(){
-    dog.addImage(happyDog);
-  foodS--;
 
-  database.ref("/").update({
-    Food: foodS,
-    FeedTime: hour()
+
+  feedButton.mousePressed(function(){
+    if(foodS!=0){
+      dog.addImage(happyDog);
+      foodS--;
+  
+      database.ref("/").update({
+        Food: foodS,
+        FeedTime: hour()
+      });  
+    }
+    
   });
-  });
+  
   addButton.mousePressed(function(){
     foodS++;
   database.ref('/').update({
